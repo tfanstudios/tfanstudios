@@ -20,7 +20,6 @@ export default class TelaObject {
     }
 
     Renderizar(){
-        console.log(this.nome)
         if(this.titulo) document.title = this.titulo;
         if(!this.htmlObject){
             this.tela.innerHTML = this.conteudo;
@@ -98,6 +97,9 @@ export default class TelaObject {
                     console.warn("Script não definido para a tela: " + this.nome);
                     break;
             }
+        }
+        if(this.isQuiz) {
+            this.quiz.Start();
         }
     }
 

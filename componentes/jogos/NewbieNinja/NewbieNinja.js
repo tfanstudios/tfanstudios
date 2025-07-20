@@ -109,6 +109,16 @@ script.innerHTML = `
         // performance, uncomment the following line:
         // config.devicePixelRatio = 1;
 
+        // let btnFechar = document.createElement("div");
+        // btnFechar.className = "btn-fechar";
+        // btnFechar.textContent = "X";
+        // btnFechar.addEventListener("click", () => {
+        //   btnVoltar.click();
+        // });
+        // document.body.appendChild(btnFechar);
+
+        fullscreenButton.click();
+
 
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:

@@ -75,6 +75,11 @@
     transform: rotate(45deg);
 }
 
+.quiz-canvas{
+    margin: 10px auto;
+    border: 2px solid red;
+}
+
 #btn-voltar{
     position: absolute;
     top: 10px;
@@ -110,4 +115,22 @@
     margin: 5px;
     width: 350px;
     height: 180px;
+}
+
+.quiz-style{
+    width: 100%;
+    height: 100%;
+}
+
+.btn-fechar{
+    z-index: 999;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: black;
+    color: white;
+    position: absolute;
+    top: 45px;
+    left: 25px;  
+    border: 2px solid red;  
 }
