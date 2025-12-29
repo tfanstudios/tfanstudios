@@ -1,3 +1,5 @@
+![alt text](print-topo.png)
+
 # 🎮 TFAN Studios
 
 🌐 **Site:** https://tfanstudios.com.br
@@ -102,3 +104,5 @@ O TFAN Studios funciona como um laboratório criativo, reunindo:
 
 ## 📄 Licença
 Os jogos e conteúdos publicados possuem licença definida individualmente. Consulte cada projeto para mais detalhes.
+
+![alt text](print.png)
