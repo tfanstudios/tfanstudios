@@ -79,7 +79,7 @@
             font-weight: bold;
         }
 
-        /* SEÇÃO SOBRE O CRIADOR - ESTILO ASIÁTICO */
+        /* SEÇÃO SOBRE O STUDIO - ESTILO ASIÁTICO */
         .creator-section {
             background: var(--dark);
             color: white;
@@ -103,7 +103,7 @@
         }
 
         .creator-card::before {
-            content: "ABOUT";
+            content: "SOBRE";
             position: absolute;
             top: -30px;
             left: 20px;
@@ -137,6 +137,10 @@
             padding: 2px 10px;
             font-size: 0.8rem;
             text-transform: uppercase;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* Botão Estilo Shonen */
@@ -185,21 +189,20 @@
 
     <section class="creator-section">
         <div class="creator-card">
-            <h2>Stefan Lucas</h2>
-            <p><strong>Instrutor de TI no SENAI & Dev de Jogos</strong></p>
-            <p>
-                Bacharel em Ciência da Computação e Especialista em Desenvolvimento de Jogos. 
-                Atuo na formação técnica de novos talentos enquanto construo os pilares do universo TFAN.
+            <p><strong>Um studio indie no início de sua jornada</strong></p>
+            <p style="text-align: justify;">
+                Somos um studio indie dedicado a criar jogos e histórias marcantes.
+                Atualmente, estamos dando os primeiros passos dessa jornada com dois projetos em desenvolvimento.
             </p>
             <div class="tag-list">
-                <span class="tag">Game Design</span>
-                <span class="tag">Web Dev</span>
-                <span class="tag">Manga Art</span>
+                <span class="tag">Jogos 2D</span>
+                <span class="tag">Jogos 3D</span>
+                <span class="tag">Histórias em quadrinhos</span>
             </div>
         </div>
         
         <div style="flex: 1; text-align: center; max-width: 350px; height: 350px; border: 5px solid var(--primary); border-radius: 50%; overflow: hidden;">
-            <img src="/public/imagens/mascote.png" alt="Action Mascot" style="width: 450px;  object-fit: cover; object-position: -50px; border-radius: 50%;">
+            <img src="./public/imagens/mascote.png" alt="Action Mascot" style="width: 450px;  object-fit: cover; object-position: -50px; border-radius: 50%;">
         </div>
     </section>
 

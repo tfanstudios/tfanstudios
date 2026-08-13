@@ -1,6 +1,5 @@
-![alt text](print-topo.png)
+<img width="300" src="public/imagens/logo2.jpeg">
 
-# 🎮 TFAN Studios
 
 🌐 **Site:** https://tfanstudios.com.br
 

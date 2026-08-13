@@ -38,7 +38,7 @@
 
         .project-card:hover { transform: translate(-5px, -5px); box-shadow: 12px 12px 0px var(--primary); }
 
-        .project-img-placeholder { width: 100%; height: 200px; background: #ddd; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; font-family: 'Bangers'; color: #888; border: 2px dashed #999; }
+        .project-image { width: 100%; height: 320px; object-fit: cover; background: #ddd; margin-bottom: 15px; border: 2px solid var(--dark); }
 
         .type-label { background: var(--primary); color: white; padding: 2px 10px; font-weight: bold; display: inline-block; margin-bottom: 10px; }
 
@@ -57,30 +57,33 @@
 
     <section class="hero-title">
         <h1>Projetos & Obras</h1>
-        <p>O universo TFAN em expansão constante.</p>
+        <p>Conheça os primeiros jogos em desenvolvimento no TFAN Studio.</p>
     </section>
 
     <main class="projects-container">
         
         <article class="project-card">
-            <div class="project-img-placeholder">PREVIEW IMG</div>
-            <span class="type-label">JOGO - AÇÃO</span>
-            <h3>Cyber Ronin</h3>
-            <p>Um jogo de ação hack-and-slash ambientado em uma Tokyo futurista. O primeiro capítulo do nosso universo compartilhado.</p>
+            <img class="project-image" src="public/imagens/4em1-capa.png" alt="Imagem do jogo 4in1, but it depends">
+            <span class="type-label">JOGO 2D</span>
+            <span class="type-label">IDLE</span>
+            <span class="type-label">CLICKER</span>
+            <h3>4in1, but it depends</h3>
+            <p>
+                Após quebrar um dispositivo misterioso, o protagonista é fragmentado em quatro realidades diferentes.
+                Cada uma possui sua própria dinâmica, mas tudo o que acontece em uma realidade influencia as outras.
+            </p>
         </article>
 
         <article class="project-card">
-            <div class="project-img-placeholder">PREVIEW IMG</div>
-            <span class="type-label">QUADRINHO</span>
-            <h3>Crônicas de T-Fan</h3>
-            <p>A HQ que expande o lore dos jogos. Descubra as origens dos personagens antes de jogá-los.</p>
-        </article>
-
-        <article class="project-card">
-            <div class="project-img-placeholder">PREVIEW IMG</div>
-            <span class="type-label">JOGO - RPG</span>
-            <h3>Neon Quest</h3>
-            <p>Um RPG por turnos focado em estratégia e construção de deck, integrado com o sistema de recompensas da HQ.</p>
+            <img class="project-image" src="public/imagens/EL.png" alt="Imagem do jogo Espadachins Lendários">
+            <span class="type-label">JOGO 3D</span>
+            <span class="type-label">HACK AND SLASH</span>
+            <h3>Espadachins Lendários</h3>
+            <p>
+                Inspirado nos jogos de ação da era do PlayStation 2.
+                Uma guerreira enfrenta hordas de monstros que, na verdade, representam demônios dentro de sua própria mente,
+                enquanto trava silenciosamente uma batalha contra a depressão.
+            </p>
         </article>
 
     </main>
