@@ -1,211 +1,383 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TFAN Studios | Games & Comics</title>
-    <link rel="icon" type="image/png" href="/public/imagens/favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@300;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/public/imagens/favicon.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@300;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        :root {
-            --primary: #E63946;
-            --dark: #0B0E14;
-            --light: #F1F1F1;
-        }
+      :root {
+        --primary: #e63946;
+        --dark: #0b0e14;
+        --light: #f1f1f1;
+      }
 
-        body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--light);
-            color: var(--dark);
-            overflow-x: hidden;
-        }
+      .bi-img {
+        width: 20px;
+        color: white;
+        filter: invert(100%);
+      }
 
-        /* Efeito de Retícula Mangá no fundo */
-        .manga-bg {
-            background-image: radial-gradient(var(--dark) 1px, transparent 0);
-            background-size: 20px 20px;
-            opacity: 0.05;
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
+      .btn-icon {
+        margin: 5px;
+        padding: 15px 10px 15px 10px !important;
+        box-shadow: 3px 3px black;
+        background: var(--primary);
+        border: 2px solid black;
+        color: white;
+        transition: 0.8s;
+        box-shadow: 5px 5px 0px var(--dark);
+      }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 10%;
-            background: var(--dark);
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-        }
+      .btn-icon:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 8px 8px 0px var(--dark);
+      }
 
-        .logo-container {
-            font-weight: bold;
-            font-size: 18px;
-            color: white;
-        }
-        .logo-container  b{
-            font-weight: bold;
-            font-size: 18px;
-            color: red;
-        }
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background-color: var(--light);
+        color: var(--dark);
+        overflow-x: hidden;
+      }
 
-        .logo-container img {
-            height: 80px;
-            filter: drop-shadow(3px 3px 0px var(--primary));
-        }
+      /* Efeito de Retícula Mangá no fundo */
+      .manga-bg {
+        background-image: radial-gradient(var(--dark) 1px, transparent 0);
+        background-size: 20px 20px;
+        opacity: 0.05;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
 
-        .hero {
-            text-align: center;
-            padding: 100px 10%;
-        }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 10%;
+        background: var(--dark);
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+      }
 
-        .hero h1 {
-            font-family: 'Bangers', cursive;
-            font-size: 4rem;
-            color: var(--dark);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
+      .logo-container {
+        font-weight: bold;
+        font-size: 18px;
+        color: white;
+      }
+      .logo-container b {
+        font-weight: bold;
+        font-size: 18px;
+        color: red;
+      }
 
-        .badge {
-            background: var(--primary);
-            color: white;
-            padding: 5px 15px;
-            display: inline-block;
-            transform: skew(-15deg);
-            font-weight: bold;
-        }
+      .logo-container img {
+        height: 80px;
+        filter: drop-shadow(3px 3px 0px var(--primary));
+      }
 
-        /* SEÇÃO SOBRE O STUDIO - ESTILO ASIÁTICO */
-        .creator-section {
-            background: var(--dark);
-            color: white;
-            padding: 80px 10%;
-            position: relative;
-            margin-top: 50px;
-            border-top: 8px solid var(--primary);
-            display: flex;
-            gap: 40px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+      .hero {
+        width: 90%;
+        text-align: center;
+        padding: 0px 10px;
+        margin: 0 auto;
+        text-wrap: wrap;
+      }
 
-        .creator-card {
-            border: 4px solid var(--primary);
-            padding: 30px;
-            position: relative;
-            background: rgba(255, 255, 255, 0.05);
-            flex: 1;
-            min-width: 300px;
-        }
+      .hero h1 {
+        font-family: "Bangers", cursive;
+        font-size: 4rem;
+        color: var(--dark);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+      }
 
-        .creator-card::before {
-            content: "SOBRE";
-            position: absolute;
-            top: -30px;
-            left: 20px;
-            font-family: 'Bangers';
-            font-size: 3rem;
-            color: var(--primary);
-            -webkit-text-stroke: 1px white;
-        }
+      .badge {
+        background: var(--primary);
+        color: white;
+        padding: 5px 15px;
+        display: inline-block;
+        transform: skew(-15deg);
+        font-weight: bold;
+      }
 
-        .creator-section h2 {
-            font-family: 'Bangers';
-            font-size: 2.5rem;
-            margin-bottom: 5px;
-            color: var(--primary);
-        }
+      /* SEÇÃO SOBRE O STUDIO - ESTILO ASIÁTICO */
+      .creator-section {
+        background: var(--dark);
+        color: white;
+        padding: 80px 10%;
+        position: relative;
+        margin-top: 50px;
+        border-top: 8px solid var(--primary);
+        display: flex;
+        gap: 40px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
 
-        .creator-section p {
-            line-height: 1.6;
-            font-size: 1.1rem;
-            color: #ccc;
-        }
+      .creator-card {
+        border: 4px solid var(--primary);
+        padding: 30px;
+        position: relative;
+        background: rgba(255, 255, 255, 0.05);
+        flex: 1;
+        min-width: 300px;
+      }
 
-        .tag-list {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
+      .creator-card::before {
+        content: "SOBRE";
+        position: absolute;
+        top: -30px;
+        left: 20px;
+        font-family: "Bangers";
+        font-size: 3rem;
+        color: var(--primary);
+        -webkit-text-stroke: 1px white;
+      }
 
-        .tag {
-            border: 1px solid var(--primary);
-            padding: 2px 10px;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+      .creator-section h2 {
+        font-family: "Bangers";
+        font-size: 2.5rem;
+        margin-bottom: 5px;
+        color: var(--primary);
+      }
 
-        /* Botão Estilo Shonen */
-        .cta-button {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 15px 40px;
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            text-transform: uppercase;
-            transition: 0.3s;
-            border: 3px solid var(--dark);
-            box-shadow: 5px 5px 0px var(--dark);
-        }
+      .creator-section p {
+        line-height: 1.6;
+        font-size: 1.1rem;
+        color: #ccc;
+      }
 
-        .cta-button:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 8px 8px 0px var(--dark);
-        }
+      .tag-list {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+      }
 
+      .tag {
+        border: 1px solid var(--primary);
+        padding: 2px 10px;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Botão Estilo Shonen */
+      .cta-button {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 15px 40px;
+        background: var(--primary);
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: 0.3s;
+        border: 3px solid var(--dark);
+        box-shadow: 5px 5px 0px var(--dark);
+      }
+
+      .cta-button:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 8px 8px 0px var(--dark);
+      }
+
+      /* Grade de Projetos */
+      .projects-container {
+        /* padding: 20px; */
+        width: 100%;
+        display: flex;
+        /* flex-wrap: wrap; */
+        align-items: center;
+        justify-content: center;
+        overflow-x: auto;
+      }
+
+      .project-card {
+        background: white;
+        min-width: 350px;
+        max-width: 350px;
+        border: 3px solid var(--dark);
+        padding: 20px;
+        position: relative;
+        transition: 0.3s;
+        margin: 15px;
+        box-shadow: 8px 8px 0px var(--dark);
+      }
+
+      .project-card:hover {
+        transform: translate(-5px, -5px);
+        box-shadow: 12px 12px 0px var(--primary);
+      }
+
+      .project-image {
+        width: 100%;
+        height: 320px;
+        object-fit: cover;
+        background: #ddd;
+        margin-bottom: 15px;
+        border: 2px solid var(--dark);
+      }
+
+      .type-label {
+        background: var(--primary);
+        color: white;
+        padding: 2px 10px;
+        font-weight: bold;
+        display: inline-block;
+        margin-bottom: 10px;
+      }
+
+      .project-card h3 {
+        font-family: "Bangers";
+        font-size: 1.8rem;
+        margin: 0 0 10px 0;
+      }
+
+      .project-card p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="manga-bg"></div>
 
     <header>
-        <div class="logo-container">
-            <b>Tfan</b> Studio
-        </div>
+      <div class="logo-container"><b>Tfan</b> Studio</div>
     </header>
 
     <section class="hero">
-        <div class="badge">INDIE GAME STUDIO</div>
-        <br>
-        <br>
-        <img src="public/imagens/logo-sem-fundo 01.png" alt="TFAN Studios Logo" style="width: 200px;">
-        <p style="max-width: 600px; margin: 20px auto;">
-            Criando um universo único onde as histórias ganham vida através de 
-            <strong>Quadrinhos</strong> épicos e <strong>Jogos</strong> imersivos.
-        </p>
-        <a href="/projetos.html" class="cta-button">Explorar Universo</a>
+      <div class="badge">INDIE GAME STUDIO</div>
+      <br />
+      <br />
+      <img
+        src="public/imagens/logo-sem-fundo 01.png"
+        alt="TFAN Studios Logo"
+        style="width: 200px"
+      />
+      <p style="max-width: 600px; margin: 20px auto">
+        Criando um universo único onde as histórias ganham vida através de
+        <strong>Quadrinhos</strong> épicos e <strong>Jogos</strong> imersivos.
+      </p>
+      <a href="mailto:tfanstudios@gmail.com" class="cta-button"
+        ><i class="bi bi-envelope-at" style="margin-right: 5px"></i>Contato</a
+      >
+      <a
+        href="https://www.instagram.com/tfan.studios/"
+        class="cta-button btn-icon"
+        ><i class="bi bi-instagram"></i
+      ></a>
+      <a href="https://x.com/tfanstudios" class="cta-button btn-icon"
+        ><i class="bi bi-twitter-x"></i
+      ></a>
+      <a href="#" class="cta-button btn-icon"><i class="bi bi-twitch"></i></a>
+      <a href="#" class="cta-button btn-icon"
+        ><img
+          class="bi-img"
+          src="https://static.itch.io/images/itchio-textless-black.svg"
+          alt=""
+      /></a>
+      <a href="/equipe.html" class="cta-button"
+        ><i class="bi bi-people-fill" style="margin-right: 3px"></i>Equipe</a
+      >
+    </section>
+
+    <section class="hero">
+      <h2 style="margin: 15px !important">Projetos & Obras</h2>
+      <p style="margin: 0px !important">
+        Conheça os primeiros jogos em desenvolvimento no TFAN Studio.
+      </p>
+      <div class="projects-container">
+        <article class="project-card">
+          <img
+            class="project-image"
+            src="public/imagens/4em1-capa.png"
+            alt="Imagem do jogo 4in1, but it depends"
+          />
+          <span class="type-label">JOGO 2D</span>
+          <span class="type-label">IDLE</span>
+          <span class="type-label">CLICKER</span>
+          <h3>4in1, but it depends</h3>
+          <p>
+            Após quebrar um dispositivo misterioso, o protagonista é fragmentado
+            em quatro realidades diferentes. Cada uma possui sua própria
+            dinâmica, mas tudo o que acontece em uma realidade influencia as
+            outras.
+          </p>
+          <a href="/4-in-1/" class="cta-button">Mais detalhes</a>
+        </article>
+
+        <article class="project-card">
+          <img
+            class="project-image"
+            src="public/imagens/EL.png"
+            alt="Imagem do jogo Espadachins Lendários"
+          />
+          <span class="type-label">JOGO 3D</span>
+          <span class="type-label">HACK AND SLASH</span>
+          <h3>Espadachins Lendários</h3>
+          <p>
+            Uma guerreira enfrenta hordas de monstros que, na verdade,
+            representam demônios dentro de sua própria mente, enquanto trava
+            silenciosamente uma batalha contra a depressão.
+          </p>
+          <a href="/espadachins-lendarios/" class="cta-button">Mais detalhes</a>
+        </article>
+      </div>
     </section>
 
     <section class="creator-section">
-        <div class="creator-card">
-            <p><strong>Um studio indie no início de sua jornada</strong></p>
-            <p style="text-align: justify;">
-                Somos um studio indie dedicado a criar jogos e histórias marcantes.
-                Atualmente, estamos dando os primeiros passos dessa jornada com dois projetos em desenvolvimento.
-            </p>
-            <div class="tag-list">
-                <span class="tag">Jogos 2D</span>
-                <span class="tag">Jogos 3D</span>
-                <span class="tag">Histórias em quadrinhos</span>
-            </div>
+      <div class="creator-card">
+        <p><strong>Um studio indie no início de sua jornada</strong></p>
+        <p style="text-align: justify">
+          Somos um studio indie dedicado a criar jogos e histórias marcantes.
+          Atualmente, estamos dando os primeiros passos dessa jornada com dois
+          projetos em desenvolvimento.
+        </p>
+        <div class="tag-list">
+          <span class="tag">Jogos 2D</span>
+          <span class="tag">Jogos 3D</span>
+          <span class="tag">Histórias em quadrinhos</span>
         </div>
-        
-        <div style="flex: 1; text-align: center; max-width: 350px; height: 350px; border: 5px solid var(--primary); border-radius: 50%; overflow: hidden;">
-            <img src="./public/imagens/mascote.png" alt="Action Mascot" style="width: 450px;  object-fit: cover; object-position: -50px; border-radius: 50%;">
-        </div>
-    </section>
+      </div>
 
-</body>
+      <div
+        style="
+          flex: 1;
+          text-align: center;
+          max-width: 350px;
+          height: 350px;
+          border: 5px solid var(--primary);
+          border-radius: 50%;
+          overflow: hidden;
+        "
+      >
+        <img
+          src="./public/imagens/mascote.png"
+          alt="Action Mascot"
+          style="
+            width: 450px;
+            object-fit: cover;
+            object-position: -50px;
+            border-radius: 50%;
+          "
+        />
+      </div>
+    </section>
+  </body>
 </html>
