@@ -1,0 +1,941 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="4 em 1, Mas Depende — um jogo sobre quatro realidades conectadas, desenvolvido pela Tfan Studio."
+    />
+    <title>4 in 1, but it's depends | Tfan Studio</title>
+    <link rel="icon" type="image/png" href="../public/imagens/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bangers&family=Orbitron:wght@500;700;900&family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #e63946;
+        --dark: #0b0e14;
+        --light: #f1f1f1;
+        --void: #090618;
+        --purple: #8d45ff;
+        --electric: #6cf4ff;
+        --farm: #7bea62;
+        --track: #ff9f43;
+        --mine: #b17cff;
+        --muted: #b8b5c7;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: var(--void);
+        color: white;
+        overflow-x: hidden;
+      }
+
+      img,
+      video {
+        max-width: 100%;
+        display: block;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .manga-bg {
+        background-image:
+          radial-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+          linear-gradient(125deg, transparent 35%, rgba(141, 69, 255, 0.08), transparent 65%);
+        background-size: 22px 22px, 100% 100%;
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        pointer-events: none;
+      }
+
+      .manga-bg::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 50% 18%, rgba(95, 50, 190, 0.3), transparent 38%);
+      }
+
+      /* HEADER BASEADO NO PADRÃO DO SITE TFAN */
+      header {
+        min-height: 116px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 32px;
+        padding: 20px 8% 35px;
+        background: var(--dark);
+        clip-path: polygon(0 0, 100% 0, 100% 78%, 0 100%);
+        position: relative;
+        z-index: 20;
+      }
+
+      .logo-container {
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+
+      .logo-container b {
+        color: var(--primary);
+      }
+
+      .main-nav {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .main-nav a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        transition: color 0.2s ease;
+      }
+
+      .main-nav a:hover,
+      .main-nav a:focus-visible {
+        color: var(--electric);
+      }
+
+      .menu-toggle {
+        display: none;
+        border: 2px solid var(--primary);
+        background: transparent;
+        color: white;
+        font-size: 1.4rem;
+        cursor: pointer;
+        width: 44px;
+        height: 40px;
+      }
+
+      .hero {
+        min-height: 740px;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        position: relative;
+        isolation: isolate;
+        margin-top: -20px;
+        overflow: hidden;
+        background:
+          linear-gradient(90deg, rgba(5, 3, 18, 0.96), rgba(5, 3, 18, 0.48) 50%, rgba(5, 3, 18, 0.96)),
+          url("../public/imagens/4em1-capa.png") center / cover no-repeat;
+      }
+
+      .hero::before,
+      .hero::after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        width: 3px;
+        height: 115%;
+        top: -5%;
+        background: white;
+        box-shadow:
+          0 0 8px var(--electric),
+          0 0 22px var(--purple),
+          0 0 42px var(--purple);
+        transform: rotate(28deg);
+        opacity: 0.9;
+      }
+
+      .hero::before {
+        left: 24%;
+      }
+
+      .hero::after {
+        right: 24%;
+        transform: rotate(-28deg);
+      }
+
+      .hero-content {
+        width: min(940px, 90%);
+        padding: 120px 20px 90px;
+      }
+
+      .eyebrow,
+      .badge {
+        display: inline-block;
+        padding: 7px 16px;
+        background: var(--primary);
+        color: white;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        transform: skew(-10deg);
+      }
+
+      .game-logo {
+        width: min(700px, 96%);
+        min-height: 170px;
+        object-fit: contain;
+        margin: 24px auto 8px;
+        filter: drop-shadow(0 0 24px rgba(141, 69, 255, 0.75));
+      }
+
+      .logo-fallback {
+        font-family: "Orbitron", sans-serif;
+        font-size: clamp(3.6rem, 9vw, 7.5rem);
+        font-weight: 900;
+        line-height: 0.9;
+        text-transform: uppercase;
+        margin: 28px 0 12px;
+        color: #fff;
+        text-shadow:
+          4px 4px 0 #251344,
+          0 0 18px var(--purple);
+      }
+
+      .logo-fallback span {
+        display: block;
+        margin-top: 18px;
+        font-family: "Bangers", cursive;
+        font-size: 0.38em;
+        font-weight: 400;
+        letter-spacing: 0.08em;
+        color: var(--electric);
+      }
+
+      .hero p {
+        max-width: 740px;
+        margin: 22px auto;
+        color: #e5e2ef;
+        font-size: clamp(1rem, 2vw, 1.18rem);
+        line-height: 1.75;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px;
+        margin-top: 30px;
+      }
+
+      .cta-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 52px;
+        padding: 13px 30px;
+        background: var(--primary);
+        color: white;
+        text-decoration: none;
+        font-weight: 700;
+        text-transform: uppercase;
+        border: 3px solid var(--dark);
+        box-shadow: 6px 6px 0 var(--dark);
+        transition: 0.25s ease;
+      }
+
+      .cta-button:hover,
+      .cta-button:focus-visible {
+        transform: translate(-3px, -3px);
+        box-shadow: 9px 9px 0 var(--purple);
+      }
+
+      .cta-button.secondary {
+        background: transparent;
+        border-color: var(--electric);
+        box-shadow: 6px 6px 0 rgba(108, 244, 255, 0.2);
+      }
+
+      .leds {
+        display: flex;
+        justify-content: center;
+        gap: 14px;
+        margin-top: 34px;
+      }
+
+      .led {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: currentColor;
+        box-shadow: 0 0 8px currentColor, 0 0 18px currentColor;
+      }
+
+      .led:nth-child(1) { color: var(--farm); }
+      .led:nth-child(2) { color: var(--electric); }
+      .led:nth-child(3) { color: var(--track); }
+      .led:nth-child(4) { color: var(--mine); }
+
+      main section {
+        position: relative;
+      }
+
+      .section {
+        width: min(1180px, 88%);
+        margin: 0 auto;
+        padding: 100px 0;
+      }
+
+      .section-kicker {
+        color: var(--electric);
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+      }
+
+      .section-title {
+        font-family: "Bangers", cursive;
+        font-size: clamp(2.7rem, 6vw, 5rem);
+        font-weight: 400;
+        letter-spacing: 0.04em;
+        margin: 5px 0 16px;
+      }
+
+      .section-lead {
+        max-width: 760px;
+        color: var(--muted);
+        font-size: 1.05rem;
+        line-height: 1.8;
+      }
+
+      .story-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 48px;
+        align-items: center;
+      }
+
+      .story-copy {
+        padding-left: 26px;
+        border-left: 5px solid var(--purple);
+      }
+
+      .story-copy p {
+        color: #c9c5d6;
+        line-height: 1.85;
+      }
+
+      .device-card {
+        min-height: 410px;
+        border: 2px solid rgba(108, 244, 255, 0.5);
+        background:
+          linear-gradient(145deg, rgba(141, 69, 255, 0.18), rgba(8, 6, 23, 0.94)),
+          radial-gradient(circle at center, rgba(108, 244, 255, 0.2), transparent 50%);
+        padding: 28px;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        box-shadow: 16px 16px 0 rgba(141, 69, 255, 0.15);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .device-card::after {
+        content: "04";
+        position: absolute;
+        right: -12px;
+        bottom: -55px;
+        font-family: "Orbitron";
+        font-size: 12rem;
+        font-weight: 900;
+        color: rgba(255, 255, 255, 0.035);
+      }
+
+      .img-device {
+        width: 200px;
+        border-radius: 25px;
+        background: #24232d;
+        box-shadow: 0 0 30px rgba(108, 244, 255, 0.25);
+        transform: rotate(-5deg);
+      }
+
+      .realities-wrap {
+        background: #f3f0ec;
+        color: var(--dark);
+        clip-path: polygon(0 4%, 100% 0, 100% 96%, 0 100%);
+        padding: 70px 0;
+      }
+
+      .realities-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        margin-top: 45px;
+      }
+
+      .reality-card {
+        min-height: max-content;
+        padding: 34px;
+        position: relative;
+        overflow: hidden;
+        border: 4px solid var(--dark);
+        box-shadow: 9px 9px 0 var(--dark);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      .reality-card:hover {
+        transform: translate(-4px, -4px);
+        box-shadow: 13px 13px 0 var(--purple);
+      }
+
+      .reality-number {
+        position: absolute;
+        right: 20px;
+        top: 6px;
+        font-family: "Orbitron";
+        font-size: 7rem;
+        font-weight: 900;
+        opacity: 0.12;
+      }
+
+      .reality-card h3 {
+        font-family: "Bangers";
+        font-size: 2.5rem;
+        letter-spacing: 0.04em;
+        margin: 10px 0;
+      }
+
+      .reality-card p {
+        max-width: 520px;
+        line-height: 1.65;
+      }
+
+      .reality-card .mechanic {
+        display: inline-block;
+        margin-top: 14px;
+        padding: 5px 10px;
+        border: 2px solid currentColor;
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .farm {
+        color: #142812;
+        background-color: #a7e07c;
+        background-image:
+          linear-gradient(90deg, rgba(255,255,255,.16) 50%, transparent 50%),
+          linear-gradient(rgba(255,255,255,.16) 50%, transparent 50%);
+        background-size: 20px 20px;
+      }
+
+      .space {
+        color: #e5fbff;
+        background:
+          linear-gradient(135deg, rgba(13, 225, 255, 0.2), transparent 45%),
+          radial-gradient(circle at 80% 15%, #ff4eda 1px, transparent 2px),
+          #071429;
+        background-size: auto, 28px 28px, auto;
+      }
+
+      .athletics {
+        color: #24170e;
+        background:
+          repeating-linear-gradient(-12deg, transparent 0 24px, rgba(47, 31, 18, 0.08) 25px 27px),
+          #ead5b5;
+      }
+
+      .athletics::after {
+        content: "";
+        position: absolute;
+        width: 260px;
+        height: 80px;
+        right: -15px;
+        bottom: 35px;
+        border-top: 8px solid #24170e;
+        border-bottom: 3px solid #24170e;
+        transform: skew(-28deg) rotate(-9deg);
+        opacity: 0.25;
+      }
+
+      .mine {
+        color: #f4ecff;
+        background:
+          radial-gradient(circle at 80% 65%, rgba(130, 68, 255, 0.95), transparent 6%),
+          radial-gradient(circle at 70% 75%, rgba(44, 214, 255, 0.8), transparent 7%),
+          linear-gradient(145deg, #352440, #100d15 75%);
+      }
+
+      .connection {
+        text-align: center;
+      }
+
+      .connection-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        margin-top: 44px;
+        background: rgba(255,255,255,.15);
+        border: 1px solid rgba(255,255,255,.15);
+      }
+
+      .connection-item {
+        padding: 34px 18px;
+        background: #100c22;
+      }
+
+      .connection-item strong {
+        display: block;
+        margin-bottom: 10px;
+        font-family: "Orbitron";
+        color: var(--electric);
+      }
+
+      .connection-item span {
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .media-section {
+        background: linear-gradient(180deg, #0b0917, #160d28);
+      }
+
+      .trailer-frame {
+        aspect-ratio: 16 / 9;
+        margin-top: 40px;
+        border: 3px solid var(--purple);
+        background:
+          linear-gradient(rgba(5,3,14,.55), rgba(5,3,14,.88)),
+          url("../public/imagens/4em1-trailer-capa.jpg") center / cover no-repeat,
+          #151022;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 24px;
+        box-shadow: 0 0 38px rgba(141, 69, 255, 0.22);
+      }
+
+      .play-button {
+        width: 88px;
+        height: 88px;
+        border-radius: 50%;
+        border: 3px solid var(--electric);
+        display: grid;
+        place-items: center;
+        margin: 0 auto 18px;
+        font-size: 2rem;
+        color: var(--electric);
+        background: rgba(0,0,0,.36);
+      }
+
+      .placeholder-note {
+        color: #d9d5e5;
+        max-width: 620px;
+        line-height: 1.7;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin-top: 22px;
+      }
+
+      .gallery-item {
+        min-height: 230px;
+        border: 2px dashed rgba(108, 244, 255, 0.5);
+        background: rgba(255,255,255,.035);
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 22px;
+        color: #aaa6b8;
+      }
+
+
+      .status-panel {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        align-items: center;
+        border: 3px solid var(--primary);
+        background: var(--dark);
+        padding: 44px;
+        box-shadow: 10px 10px 0 var(--primary);
+      }
+
+      .status-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .status-list li {
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255,255,255,.12);
+        color: var(--muted);
+      }
+
+      /* FOOTER NO MESMO PADRÃO VISUAL DO SITE */
+      footer {
+        margin-top: 100px;
+        padding: 80px 8% 35px;
+        background: var(--dark);
+        border-top: 8px solid var(--primary);
+        clip-path: polygon(0 8%, 100% 0, 100% 100%, 0 100%);
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr 1fr;
+        gap: 45px;
+        max-width: 1180px;
+        margin: 0 auto 45px;
+      }
+
+      .footer-brand {
+        font-size: 1.3rem;
+        font-weight: 700;
+      }
+
+      .footer-brand b {
+        color: var(--primary);
+      }
+
+      .footer-grid p,
+      .footer-grid a {
+        color: #aaa;
+        font-size: 0.9rem;
+        line-height: 1.8;
+      }
+
+      .footer-grid h3 {
+        font-family: "Bangers";
+        color: white;
+        font-size: 1.5rem;
+        letter-spacing: 0.05em;
+        margin-top: 0;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-links a {
+        text-decoration: none;
+      }
+
+      .footer-links a:hover {
+        color: var(--primary);
+      }
+
+      .copyright {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding-top: 26px;
+        border-top: 1px solid rgba(255,255,255,.1);
+        color: #777;
+        font-size: 0.8rem;
+        text-align: center;
+      }
+
+      @media (max-width: 900px) {
+        header {
+          padding-inline: 6%;
+        }
+
+        .menu-toggle {
+          display: block;
+        }
+
+        .main-nav {
+          display: none;
+          position: absolute;
+          top: 76px;
+          right: 6%;
+          width: min(280px, 88vw);
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 24px;
+          background: var(--dark);
+          border: 2px solid var(--primary);
+        }
+
+        .main-nav.open {
+          display: flex;
+        }
+
+        .story-grid,
+        .status-panel,
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .connection-grid {
+          grid-template-columns: repeat(1, 1fr);
+        }
+
+        .realities-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .gallery-grid {
+          grid-template-columns: repeat(1, 1fr);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .hero {
+          min-height: 650px;
+        }
+
+        .hero-content {
+          padding-top: 90px;
+        }
+
+        .section {
+          width: min(90%, 1180px);
+          padding: 72px 0;
+        }
+
+        .connection-grid,
+        .status-panel {
+          padding: 28px 22px;
+        }
+
+        footer {
+          padding-top: 70px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="manga-bg"></div>
+
+    <header>
+      <a class="logo-container" href="../index.html"><b>Tfan</b> Studio</a>
+      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">☰</button>
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a href="#sobre">Sobre</a>
+        <a href="#realidades">Realidades</a>
+        <a href="#midia">Mídia</a>
+        <a href="#desenvolvimento">Desenvolvimento</a>
+        <a href="mailto:tfanstudios@gmail.com">Contato</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="inicio">
+        <div class="hero-content">
+          <span class="eyebrow">Um jogo da Tfan Studio</span>
+
+          <!-- Para usar o logo em imagem, descomente a linha abaixo e apague o h1. -->
+          <!-- <img class="game-logo" src="../public/imagens/4em1-logo.png" alt="4 em 1, Mas Depende" /> -->
+          <h1 class="logo-fallback">4 em 1<span>Mas Depende</span></h1>
+
+          <p>
+            Um dispositivo quebrado. Quatro versões da mesma mente. Realidades completamente
+            diferentes que continuam ligadas por uma única consequência: tudo o que você faz em
+            um mundo altera os demais.
+          </p>
+          <div class="actions">
+            <a class="cta-button" href="#sobre">Conheça o projeto</a>
+            <a class="cta-button secondary" href="#trailer">Assistir ao trailer</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="sobre">
+        <div class="story-grid">
+          <div class="story-copy">
+            <span class="section-kicker">A premissa</span>
+            <h2 class="section-title">Uma mente. Quatro destinos.</h2>
+            <p>
+              Após danificar um misterioso controle dimensional, o protagonista deixa de existir
+              em uma única realidade. Sua consciência passa a viver simultaneamente como
+              fazendeiro, piloto espacial, atleta e minerador.
+            </p>
+            <p>
+              Cada fragmento parece um jogo independente, com linguagem visual, ritmo e mecânicas
+              próprios. A verdadeira experiência surge quando o jogador percebe que os quatro
+              mundos formam um só quebra-cabeça. Recursos, decisões, falhas e conquistas atravessam
+              as rachaduras entre as dimensões.
+            </p>                
+          </div>
+
+          <aside class="device-card" aria-label="Controle dimensional">
+            <!-- Substitua este bloco por uma imagem do controle dimensional, se desejar. -->
+            <div>
+              <img src="./imagens/controle.png" class="img-device">
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="realities-wrap" id="realidades">
+        <div class="section">
+          <span class="section-kicker" style="color:#5e23bd">Os quatro minigames</span>
+          <h2 class="section-title">Realidades quebradas</h2>
+          <p class="section-lead" style="color:#4d4858">
+            Quatro gêneros, quatro estilos artísticos e um único sistema de progressão conectado.
+            As descrições abaixo são temporárias e podem ser substituídas pelos detalhes finais.
+          </p>
+
+          <div class="realities-grid">
+            <article class="reality-card farm">
+              <span class="reality-number">01</span>
+              <span class="badge" style="background:#285f21">Pixel art</span>
+              <h3>Vida na Fazenda</h3>
+              <span class="mechanic">Gestão • Cultivo • Tempo</span>
+            </article>
+
+            <article class="reality-card space">
+              <span class="reality-number">02</span>
+              <span class="badge" style="background:#087b94">Anime 2D</span>
+              <h3>Combate Espacial</h3>
+              <span class="mechanic">Arcade • Tiro • Reflexo</span>
+            </article>
+
+            <article class="reality-card athletics">
+              <span class="reality-number">03</span>
+              <span class="badge" style="background:#a95618">Desenho à mão</span>
+              <h3>Corrida Infinita</h3>
+              <span class="mechanic">Corrida • Ritmo • Precisão</span>
+            </article>
+
+            <article class="reality-card mine">
+              <span class="reality-number">04</span>
+              <span class="badge" style="background:#5b2d9f">3D estilizado</span>
+              <h3>Mineração Profunda</h3>
+              <span class="mechanic">Exploração • Recursos • Risco</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section connection">
+        <span class="section-kicker">A principal mecânica</span>
+        <h2 class="section-title">Tudo está conectado</h2>
+        <p class="section-lead" style="margin-inline:auto">
+          O jogador alterna entre as quatro realidades para superar bloqueios. Nenhum minigame
+          existe isoladamente: cada progresso abre novas possibilidades nos demais.
+        </p>
+        <div class="connection-grid">
+          <div class="connection-item"><strong>PLANTE</strong><span>Produza alimentos e materiais.</span></div>
+          <div class="connection-item"><strong>CONQUISTE</strong><span>Obtenha tecnologia no espaço.</span></div>
+          <div class="connection-item"><strong>SUPERE</strong><span>Amplie o limite físico do herói.</span></div>
+          <div class="connection-item"><strong>EXTRAIA</strong><span>Encontre cristais dimensionais.</span></div>
+        </div>
+      </section>
+
+      <section class="media-section" id="midia">
+        <div class="section">
+          <span class="section-kicker">Vídeos e imagens</span>
+          <h2 class="section-title">Veja as realidades em movimento</h2>
+          <div class="trailer-frame" id="trailer">
+            <!-- Para colocar um vídeo local, substitua o conteúdo por:
+            <video controls poster="../public/imagens/4em1-trailer-capa.jpg">
+              <source src="../public/videos/trailer-4em1.mp4" type="video/mp4" />
+            </video>
+            -->
+            <!-- Para usar YouTube, coloque um iframe 16:9 nesta área. -->
+            <div>
+              <div class="play-button">▶</div>
+              <h3>TRAILER EM BREVE</h3>
+            </div>
+          </div>
+
+          <div class="gallery-grid" aria-label="Galeria de imagens">
+            <div class="gallery-item"><img src="./imagens/farm.png" alt=""></div>
+            <div class="gallery-item"><img src="./imagens/nave.png" alt=""></div>
+            <div class="gallery-item"><img src="./imagens/runner.png" alt=""></div>
+            <div class="gallery-item"><img src="./imagens/mine.png" alt=""></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="desenvolvimento">
+        <div class="status-panel">
+          <div>
+            <span class="section-kicker">Em desenvolvimento</span>
+            <h2 class="section-title">Acompanhe o projeto</h2>
+            <p class="section-lead">
+              4 em 1, Mas Depende está em produção pela Tfan Studio. Esta área pode receber um
+              diário de desenvolvimento, previsão de lançamento, plataformas e links das lojas.
+            </p>
+            <a class="cta-button" href="https://www.instagram.com/tfan.studios/" target="_blank" rel="noreferrer">Seguir novidades</a>
+          </div>
+          <ul class="status-list">
+            <li><strong>Gênero:</strong> IDLE - 2D - minigames</li>
+            <li><strong>Plataforma inicial:</strong> PC</li>
+            <li><strong>Modo:</strong> um jogador</li>
+            <li><strong>Status:</strong> em desenvolvimento</li>
+            <li><strong>Desenvolvedora:</strong> Tfan Studio</li>
+            <li><strong>Game Designer:</strong> Stefan Lucas</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand"><b>Tfan</b> Studio</div>
+          <p>
+            Criando universos onde histórias ganham vida por meio de jogos e quadrinhos.
+          </p>
+        </div>
+        <div>
+          <h3>Navegação</h3>
+          <nav class="footer-links" aria-label="Navegação do rodapé">
+            <a href="#sobre">Sobre o jogo</a>
+            <a href="#realidades">As quatro realidades</a>
+            <a href="#midia">Galeria e trailer</a>
+            <a href="#desenvolvimento">Desenvolvimento</a>
+          </nav>
+        </div>
+        <div>
+          <h3>Contato</h3>
+          <div class="footer-links">
+            <a href="mailto:tfanstudios@gmail.com">tfanstudios@gmail.com</a>
+            <a href="https://www.instagram.com/tfan.studios/" target="_blank" rel="noreferrer">Instagram</a>
+            <a href="https://x.com/tfanstudios" target="_blank" rel="noreferrer">X / Twitter</a>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">© <span id="year"></span> Tfan Studio. Todos os direitos reservados.</div>
+    </footer>
+
+    <script>
+      const menuButton = document.querySelector(".menu-toggle");
+      const navigation = document.querySelector(".main-nav");
+
+      menuButton.addEventListener("click", () => {
+        const isOpen = navigation.classList.toggle("open");
+        menuButton.setAttribute("aria-expanded", String(isOpen));
+        menuButton.textContent = isOpen ? "×" : "☰";
+      });
+
+      navigation.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navigation.classList.remove("open");
+          menuButton.setAttribute("aria-expanded", "false");
+          menuButton.textContent = "☰";
+        });
+      });
+
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
